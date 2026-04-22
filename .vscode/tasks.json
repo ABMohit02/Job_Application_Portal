@@ -1,0 +1,79 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start Backend Server",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "dev"],
+      "cwd": "${workspaceFolder}/backend",
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^.*$",
+          "line": 1
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^.*Server running on port.*",
+          "endsPattern": "^.*$"
+        }
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Start Frontend Server",
+      "type": "shell",
+      "command": "npm",
+      "args": ["start"],
+      "cwd": "${workspaceFolder}/frontend",
+      "isBackground": true,
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Start Both Servers",
+      "dependsOn": ["Start Backend Server", "Start Frontend Server"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Install Backend Dependencies",
+      "type": "shell",
+      "command": "npm",
+      "args": ["install"],
+      "cwd": "${workspaceFolder}/backend",
+      "presentation": {
+        "reveal": "always"
+      }
+    },
+    {
+      "label": "Install Frontend Dependencies",
+      "type": "shell",
+      "command": "npm",
+      "args": ["install"],
+      "cwd": "${workspaceFolder}/frontend",
+      "presentation": {
+        "reveal": "always"
+      }
+    },
+    {
+      "label": "Build Frontend",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "build"],
+      "cwd": "${workspaceFolder}/frontend",
+      "presentation": {
+        "reveal": "always"
+      }
+    }
+  ]
+}

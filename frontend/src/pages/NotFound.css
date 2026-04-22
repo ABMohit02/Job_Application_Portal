@@ -1,0 +1,118 @@
+.notfound-page {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%);
+  padding: 40px 20px;
+}
+
+.notfound-container {
+  text-align: center;
+  background: white;
+  border-radius: 20px;
+  padding: 60px 40px;
+  box-shadow: 0 8px 32px rgba(0, 123, 255, 0.12);
+  max-width: 520px;
+  width: 100%;
+}
+
+.notfound-code {
+  font-size: 96px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.notfound-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.notfound-container h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 12px;
+}
+
+.notfound-container > p {
+  color: #6b7280;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+.notfound-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+.notfound-btn-primary,
+.notfound-btn-secondary {
+  padding: 12px 28px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.notfound-btn-primary {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.notfound-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 123, 255, 0.4);
+}
+
+.notfound-btn-secondary {
+  background: white;
+  color: #007bff;
+  border: 2px solid #007bff;
+}
+
+.notfound-btn-secondary:hover {
+  background: #f0f7ff;
+}
+
+.notfound-suggestions {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 24px;
+}
+
+.notfound-suggestions p {
+  color: #9ca3af;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.notfound-links {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.notfound-links a {
+  color: #007bff;
+  font-size: 14px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.notfound-links a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
