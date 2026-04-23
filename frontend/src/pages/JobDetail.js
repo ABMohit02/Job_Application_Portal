@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { AuthContext, API } from '../context/AuthContext';
+import { formatSalaryWithConversion } from '../utils/currencyHelper';
 import './JobDetail.css';
 
 const JobDetail = () => {
@@ -139,7 +140,7 @@ const JobDetail = () => {
           </div>
           {job.salary && (
             <div className="meta-item">
-              <strong>Salary:</strong> ${job.salary.min} - ${job.salary.max}
+              <strong>Salary:</strong> {formatSalaryWithConversion(job.salary)}
             </div>
           )}
           <div className="meta-item">

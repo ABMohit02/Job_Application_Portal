@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { API, AuthContext } from '../context/AuthContext';
-import { getCurrencySymbol } from '../utils/currencyHelper';
+import { formatSalaryWithConversion } from '../utils/currencyHelper';
 import './Jobs.css';
 
 const Jobs = () => {
@@ -194,7 +194,7 @@ const Jobs = () => {
                 <p className="description">{job.description.substring(0, 150)}...</p>
                 {job.salary && (
                   <p className="salary">
-                    💰 {getCurrencySymbol(job.salary.currency)}{job.salary.min} - {getCurrencySymbol(job.salary.currency)}{job.salary.max}
+                    💰 {formatSalaryWithConversion(job.salary)}
                   </p>
                 )}
                 <div className="skills">
