@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { AuthContext, API } from '../context/AuthContext';
-import { getCurrencySymbol } from '../utils/currencyHelper';
 import './JobDetail.css';
 
 const JobDetail = () => {
@@ -15,13 +14,7 @@ const JobDetail = () => {
   const { user, loading: authLoading } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!authLoading) {
-      fetchJob();
-    }
-  }, [id, authLoading]);
-
-  const fetchJob = async () => {
+  const fetchJob = useCallback(async () => {
     try {
       const response = await API.get(`/api/jobs/${id}`);
       setJob(response.data);
@@ -39,7 +32,13 @@ const JobDetail = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [id, user]);
+
+  useEffect(() => {
+    if (!authLoading) {
+      fetchJob();
+    }
+  }, [authLoading, fetchJob]);
 
   const handleApply = async (e) => {
     e.preventDefault();

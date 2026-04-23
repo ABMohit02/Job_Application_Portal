@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { API, AuthContext } from '../context/AuthContext';
 import { getCurrencySymbol } from '../utils/currencyHelper';
@@ -22,14 +22,7 @@ const Jobs = () => {
   });
   const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    fetchJobs();
-    if (user && user.role === 'user') {
-      checkHireStatus();
-    }
-  }, [filters, page, user]);
-
-  const checkHireStatus = async () => {
+  const checkHireStatus = useCallback(async () => {
     try {
       const res = await API.get('/api/applications/user/my-applications');
       const hired = res.data.some(a => a.status === 'hired');
@@ -37,9 +30,9 @@ const Jobs = () => {
     } catch (err) {
       console.error("Error checking hire status:", err);
     }
-  };
+  }, []);
 
-  const fetchJobs = async () => {
+  const fetchJobs = useCallback(async () => {
     try {
       setLoading(true);
       const params = new URLSearchParams({
@@ -55,7 +48,14 @@ const Jobs = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [filters, page]);
+
+  useEffect(() => {
+    fetchJobs();
+    if (user && user.role === 'user') {
+      checkHireStatus();
+    }
+  }, [fetchJobs, checkHireStatus, user]);
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext, API } from '../context/AuthContext';
 import './Dashboard.css';
@@ -19,21 +19,9 @@ const Dashboard = () => {
     resume: null
   });
 
-  useEffect(() => {
-    if (user) {
-      fetchAnalytics();
-      setFormData({
-        name: user.name || '',
-        company: user.company || '',
-        bio: user.bio || '',
-        skills: user.skills ? user.skills.join(', ') : '',
-        resume: null
-      });
-    }
-  }, [user]);
-
-  const fetchAnalytics = async () => {
+  const fetchAnalytics = useCallback(async () => {
     try {
+      if (!user) return;
       if (user.role === 'user') {
         const res = await API.get('/api/applications/user/analytics');
         setAnalytics(res.data);
@@ -46,7 +34,20 @@ const Dashboard = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      fetchAnalytics();
+      setFormData({
+        name: user.name || '',
+        company: user.company || '',
+        bio: user.bio || '',
+        skills: user.skills ? user.skills.join(', ') : '',
+        resume: null
+      });
+    }
+  }, [user, fetchAnalytics]);
 
   const handleEditSubmit = async (e) => {
     e.preventDefault();
